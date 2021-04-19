@@ -1,0 +1,70 @@
+{% extends "bootstrap/base.html" %}
+
+{% block header %}
+  <h1>{% block title %} Hospital {% endblock %}</h1>
+  <link rel="stylesheet" href="{{ url_for("static", filename="base.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class = "col-md-12">
+           
+                {% if lista_consultas %}
+                    <h2>Listado de consultas:  </h2>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Maxima cantidad de pacientes</th>
+                            <th>Especialista a cargo</th>
+                            <th>Tipo consulta</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for con in lista_consultas %}
+                        <tr>
+                            <td>{{ con.get_id_consulta() }}</td>
+                            <td>{{ con.get_cantidad_pacientes_max() }}</td>
+                            <td>{{ con.get_nombre_especialista() }}</td>
+                            <td>{{ con.get_tipo_consulta_valor() }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            
+            <h2>Listado de pacientes:  </h2>
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>N usuario</th>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for pac in lista_pacientes %}
+                        <tr>
+                            <td>{{ pac.get_nombre() }}</td>
+                            <td>{{ pac.get_edad() }}</td>
+                            <td>{{ pac.get_n_historia_clinica() }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>   
+
+                <h2>Funcionalidades:  </h2>
+                <form action="/hospital/mayor-riesgo/" method="get">
+                    <label for="name">Listar pacientes con mayor riesgo que: </label>
+                    <input type="text" name="n_historia" id="n_historia"/>
+                    <input type="submit" id="send-signup"  value="VER" />
+                </form>
+
+
+                <button > <a href='/prioridad'> Ver Prioridad de pacientes </a> </button>
+                <button > <a href='/'> Regresar a principal </a> </button>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

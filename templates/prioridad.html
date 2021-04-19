@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} Calculo de prioridades {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class = "col-md-12">
+            <h2>Calculo de prioridades: </h2>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>N usuario</th>
+                    <th>Prioridad</th>
+                    <th>Riesgo</th>
+                <tr>
+            </thead>
+            <tbody>
+                {% for pac in lista_pacientes_DTO %}
+                <tr>
+                    <td>{{ pac.get_nombre() }}</td>
+                    <td>{{ pac.get_edad() }}</td>
+                    <td>{{ pac.get_n_historia_clinica() }}</td>
+                    <td>{{ pac.get_prioridad() }}</td>
+                    <td>{{ pac.get_riesgo() }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <button > <a href='/hospital'> Regresar a hospital </a> </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
